@@ -22,7 +22,25 @@ app.use(
     credentials: true,
   })
 );
-
+const allowedOrigins =[
+  "https://whatsapp-clone-client-rho.vercel.app",
+  "https://whatsapp-clone-client-rho.vercel.app/",
+  "http://localhost:5173",
+  "https://whatsapp-clone-server-h35t.onrender.com",
+  "https://whatsapp-clone-server-h35t.onrender.com/",
+  undefined
+]
+const corsOptions = {
+  origin: (origin, callback)=>{
+    if(!origin || allowedOrigins.includes(origin)){
+      callback(null, true);
+    }else{
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+};
+app.use(cors(corsOptions));
+app.use("*", cors(corsOptions));
 app.use("/uploads/profiles", express.static("uploads/profiles"));
 app.use("/uploads/files", express.static("uploads/files"))
 
