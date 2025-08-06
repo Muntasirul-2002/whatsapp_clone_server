@@ -33,6 +33,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/messages", messagesRoutes)
 app.use("/api/channel", ChannelRoute)
+app.get("/", (req, res) => {
+  res.send("Welcome to WeCollab Server");
+});
 const server = app.listen(port, () => {
   console.log(`Server running at ${port}`);
 });
