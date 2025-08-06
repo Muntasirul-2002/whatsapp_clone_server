@@ -15,13 +15,13 @@ const app = express();
 const port = process.env.PORT || 3002;
 const databaseURL = process.env.DATABASE_URL;
 
-app.use(
-  cors({
-    origin: [process.env.ORIGIN],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [process.env.ORIGIN],
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+//     credentials: true,
+//   })
+// );
 const allowedOrigins =[
   "https://whatsapp-clone-client-rho.vercel.app",
   "https://whatsapp-clone-client-rho.vercel.app/",
