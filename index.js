@@ -15,32 +15,14 @@ const app = express();
 const port = process.env.PORT || 3002;
 const databaseURL = process.env.DATABASE_URL;
 
-// app.use(
-//   cors({
-//     origin: [process.env.ORIGIN],
-//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-//     credentials: true,
-//   })
-// );
-const allowedOrigins =[
-  "https://whatsapp-clone-client-rho.vercel.app",
-  "https://whatsapp-clone-client-rho.vercel.app/",
-  "http://localhost:5173",
-  "https://whatsapp-clone-server-h35t.onrender.com",
-  "https://whatsapp-clone-server-h35t.onrender.com/",
-  undefined
-]
-const corsOptions = {
-  origin: (origin, callback)=>{
-    if(!origin || allowedOrigins.includes(origin)){
-      callback(null, true);
-    }else{
-      callback(new Error("Not allowed by CORS"));
-    }
-  }
-};
-app.use(cors(corsOptions));
-app.use("*", cors(corsOptions));
+app.use(
+  cors({
+    origin: [process.env.ORIGIN],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use("/uploads/profiles", express.static("uploads/profiles"));
 app.use("/uploads/files", express.static("uploads/files"))
 
@@ -53,7 +35,7 @@ app.use("/api/messages", messagesRoutes)
 app.use("/api/channel", ChannelRoute)
 app.get("/", (req, res) => {
   res.send("Welcome to WeCollab Server");
-});
+})
 const server = app.listen(port, () => {
   console.log(`Server running at ${port}`);
 });
